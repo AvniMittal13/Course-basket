@@ -205,23 +205,84 @@ def track(request):
 
     send_courses = track_page(request)
 
-    ic = all_courses.filter(type = "IC Compulsory").count()
-    sci_b1 = all_courses.filter(type = "Science Basket 1").count()
-    sci_b2 = all_courses.filter(type = "Science Basket 2").count()
-    sci_b3 = all_courses.filter(type = "Science Basket 3").count()
-    hss = all_courses.filter(type = "HSS").count()
-    dc = all_courses.filter(type = "DE").count()
-    fe = all_courses.filter(type = "FE").count()
-    mtp = all_courses.filter(type = "").count()
+    ic = all_courses.filter(type = "IC Compulsory")
+    sci_b1 = all_courses.filter(type = "Science Basket 1")
+    sci_b2 = all_courses.filter(type = "Science Basket 2")
+    sci_b3 = all_courses.filter(type = "Science Basket 3")
+    hss = all_courses.filter(type = "HSS")
+    dc = all_courses.filter(type = "DE")
+    fe = all_courses.filter(type = "FE")
+    mtp = all_courses.filter(type = "")
 
-    ic_curr = current_courses.filter(type = "IC Compulsory").count()
-    sci_b1_curr = current_courses.filter(type = "Science Basket 1").count()
-    sci_b2_curr = current_courses.filter(type = "Science Basket 2").count()
-    sci_b3_curr = current_courses.filter(type = "Science Basket 3").count()
-    hss_curr = current_courses.filter(type = "HSS").count()
-    dc_curr = current_courses.filter(type = "DE").count()
-    fe_curr = current_courses.filter(type = "FE").count()
-    mtp_curr = current_courses.filter(type = "").count()
+    ic_curr = current_courses.filter(type = "IC Compulsory")
+    sci_b1_curr = current_courses.filter(type = "Science Basket 1")
+    sci_b2_curr = current_courses.filter(type = "Science Basket 2")
+    sci_b3_curr = current_courses.filter(type = "Science Basket 3")
+    hss_curr = current_courses.filter(type = "HSS")
+    dc_curr = current_courses.filter(type = "DE")
+    fe_curr = current_courses.filter(type = "FE")
+    mtp_curr = current_courses.filter(type = "")
+
+    ic_credits = 0
+    if ic!= 0 :
+        for course in ic:
+            ic_credits+course.credits
+
+        for course in ic_curr:
+            ic_credits+course.credits
+
+    sci_b1_credits = 0
+    if sci_b1!= 0 :
+        for course in sci_b1:
+            sci_b1_credits+course.credits
+        for course in sci_b1_curr:
+            sci_b1_credits+course.credits
+
+    sci_b2_credits = 0
+    if sci_b2!= 0 :
+        for course in sci_b2:
+            sci_b2_credits+course.credits
+        for course in sci_b2_curr:
+            sci_b2_credits+course.credits
+
+    sci_b3_credits = 0
+    if sci_b3!= 0 :
+        for course in sci_b3:
+            sci_b3_credits+course.credits
+        for course in sci_b3_curr:
+            sci_b3_credits+course.credits
+
+    hss_credits = 0
+    if hss!= 0 :
+        for course in hss:
+            hss_credits+course.credits
+        for course in hss_curr:
+            hss_credits+course.credits
+
+    dc_credits = 0
+    if dc!= 0 :
+        for course in dc:
+            dc_credits+course.credits
+        for course in dc_curr:
+            dc_credits+course.credits
+
+    fe_credits = 0
+    if fe!= 0 :
+        for course in fe:
+            fe_credits+course.credits
+        for course in fe_curr:
+            fe_credits+course.credits
+
+    mtp_credits = 0
+    if mtp!= 0 :
+        for course in mtp:
+            mtp_credits+course.credits
+        for course in mtp_curr:
+            mtp_credits+course.credits
+
+
+    print(ic_credits)
+
 
     print(ic)
 
@@ -229,22 +290,22 @@ def track(request):
 
     context = {
         'all_courses' : send_courses,
-        'ic': ic + ic_curr,
-        'ic_left':64-(ic + ic_curr),
-        'sci_b1':sci_b1 + sci_b1_curr,
-        'sci_b1_left': 3 - sci_b1 - sci_b1_curr,
-        'sci_b2' : sci_b2 + sci_b2_curr,
-        'sci_b2_left' : 3 - sci_b2 - sci_b2_curr,
-        'sci_b3': sci_b3 + sci_b3_curr,
-        'sci_b3_left' : 3 - sci_b3 - sci_b3_curr,
-        'hss' : hss + hss_curr,
-        'hss_left' :18- hss - hss_curr,
-        'dc' : dc + dc_curr,
-        'dc_left' :33- dc - dc_curr,
-        'fe': fe + fe_curr,
-        'fe_left':22- fe - fe_curr,
-        'mtp': mtp + mtp_curr,
-        'mtp_left': 12-mtp - mtp_curr,   
+        'ic': ic_credits,
+        'ic_left':64-ic_credits,
+        'sci_b1':sci_b1_credits,
+        'sci_b1_left': 3 - sci_b1_credits,
+        'sci_b2' : sci_b2_credits,
+        'sci_b2_left' : 3 - sci_b2_credits,
+        'sci_b3': sci_b3_credits,
+        'sci_b3_left' : 3 - sci_b3_credits,
+        'hss' : hss_credits,
+        'hss_left' :18- hss_credits,
+        'dc' : dc_credits,
+        'dc_left' :33-dc_credits,
+        'fe': fe_credits,
+        'fe_left':22 - fe_credits,
+        'mtp': mtp_credits,
+        'mtp_left': 12 - mtp_credits,   
     }
 
     return render(request, 'users/track.html', context)
