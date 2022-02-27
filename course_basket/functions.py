@@ -451,18 +451,18 @@ def update_comp_courses(request,prev_courses):
 
     for course in prev_courses:
         current_user.profile.completed_courses.add(course)
-    current_user.profile.completed_courses.save()
+    # current_user.profile.completed_courses.save()
     
 
 def update_curr_courses(request,new_sem):
     current_user = request.user
     sem_col_course = return_sem(new_sem)
-    completed = current_user.profile.completed_courses.objects.all()
+    completed = current_user.profile.completed_courses.all()
     comp_new_sem = completed.exclude(**{sem_col_course : "NULL"})
 
     for course in comp_new_sem:
         current_user.profile.current_courses.add(course)
-    current_user.profile.current_courses.save()
+    # current_user.profile.current_courses.save()
 
 def track_page(request):
     current_user = request.user
